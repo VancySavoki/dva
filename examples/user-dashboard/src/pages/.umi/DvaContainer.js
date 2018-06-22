@@ -7,8 +7,9 @@ const app = dva({
 });
 window.g_app = app;
 app.use(createLoading());
-
-app.model({ ...require('../../pages/users/models/users.js').default });
+app.use(require('../../plugins/onError.js').default);
+app.model({ ...(require('../../pages/deployments/models/deployments.js').default) });
+app.model({ ...(require('../../pages/nodes/models/nodes.js').default) });
 
 class DvaContainer extends Component {
   render() {

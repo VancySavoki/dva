@@ -6,23 +6,20 @@ import withRouter from 'umi/withRouter';
 function Header({ location }) {
   return (
     <Menu selectedKeys={[location.pathname]} mode="horizontal" theme="dark">
-      <Menu.Item key="/users">
-        <Link to="/users">
-          <Icon type="bars" />Users
+      <Menu.Item key="/nodes">
+        <Link to="/nodes">
+          <Icon type="bars" />Nodes
         </Link>
       </Menu.Item>
-      <Menu.Item key="/">
-        <Link to="/">
-          <Icon type="home" />Home
+      <Menu.Item key="/deployments">
+        <Link to="/deployments">
+          <Icon type="home" />deployments
         </Link>
       </Menu.Item>
       <Menu.Item key="/404">
         <Link to="/page-you-dont-know">
           <Icon type="frown-circle" />404
         </Link>
-      </Menu.Item>
-      <Menu.Item key="/antd">
-        <a href="https://github.com/dvajs/dva">dva</a>
       </Menu.Item>
     </Menu>
   );

@@ -1,23 +1,49 @@
+import React from 'react';
 import { Router as DefaultRouter, Route, Switch } from 'react-router-dom';
 import dynamic from 'umi/dynamic';
-import('/Users/chencheng/Documents/Work/Misc/dva/packages/dva-example-user-dashboard/src/global.css');
-import Layout from '/Users/chencheng/Documents/Work/Misc/dva/packages/dva-example-user-dashboard/src/layouts/index.js';
+import renderRoutes from 'umi/_renderRoutes';
+import { routerRedux } from 'dva/router';
 
-const Router = window.g_CustomRouter || DefaultRouter;
+
+let Router = DefaultRouter;
+const { ConnectedRouter } = routerRedux;
+Router = ConnectedRouter;
+
+
+let routes = [
+  {
+    "path": "/",
+    "component": require('../../layouts/index.js').default,
+    "routes": [
+      {
+        "path": "/deployments",
+        "exact": true,
+        "component": require('../deployments/page.js').default
+      },
+      {
+        "path": "/",
+        "exact": true,
+        "component": require('../index.js').default
+      },
+      {
+        "path": "/nodes",
+        "exact": true,
+        "component": require('../nodes/page.js').default
+      },
+      {
+        "component": () => React.createElement(require('/home/savoki/sdb1/web/dva/examples/user-dashboard/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', routes: '[{"path":"/","component":"./src/layouts/index.js","routes":[{"path":"/deployments","exact":true,"component":"./src/pages/deployments/page.js"},{"path":"/","exact":true,"component":"./src/pages/index.js"},{"path":"/nodes","exact":true,"component":"./src/pages/nodes/page.js"}]}]' })
+      }
+    ]
+  }
+];
+
 
 export default function() {
   return (
-    <Router history={window.g_history}>
-      <Layout>
-        <Switch>
-          <Route exact path="/" component={require('../index.js').default} />
-          <Route
-            exact
-            path="/users"
-            component={require('../users/page.js').default}
-          />
-        </Switch>
-      </Layout>
-    </Router>
+<Router history={window.g_history}>
+  <Route render={({ location }) =>
+    renderRoutes(routes, {}, { location })
+  } />
+</Router>
   );
 }

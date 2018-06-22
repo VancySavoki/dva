@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './page.css';
-import UsersComponent from './components/Users/Users';
+import NodesComponent from './components/Nodes/Nodes';
 
-function Users() {
+function Nodes() {
   return (
     <div className={styles.normal}>
-      <UsersComponent />
+      <NodesComponent />
     </div>
   );
 }
 
-export default Users;
+export default Nodes;

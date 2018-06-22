@@ -1,5 +1,5 @@
 {
-  "name": "dva-example-user-dashboard",
+  "name": "dva-example-node-dashboard",
   "private": true,
   "scripts": {
     "start": "umi dev",

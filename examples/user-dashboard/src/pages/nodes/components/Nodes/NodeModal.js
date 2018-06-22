@@ -3,7 +3,7 @@ import { Modal, Form, Input } from 'antd';
 
 const FormItem = Form.Item;
 
-class UserEditModal extends Component {
+class NodeEditModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +37,7 @@ class UserEditModal extends Component {
   render() {
     const { children } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const { name, email, website } = this.props.record;
+    const { spec, status } = this.props.record;
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 },
@@ -47,7 +47,7 @@ class UserEditModal extends Component {
       <span>
         <span onClick={this.showModelHandler}>{children}</span>
         <Modal
-          title="Edit User"
+          title="Edit Nodes"
           visible={this.state.visible}
           onOk={this.okHandler}
           onCancel={this.hideModelHandler}
@@ -55,17 +55,17 @@ class UserEditModal extends Component {
           <Form layout="horizontal" onSubmit={this.okHandler}>
             <FormItem {...formItemLayout} label="Name">
               {getFieldDecorator('name', {
-                initialValue: name,
+                initialValue: spec? spec.externalID:'',
               })(<Input />)}
             </FormItem>
-            <FormItem {...formItemLayout} label="Email">
-              {getFieldDecorator('email', {
-                initialValue: email,
+            <FormItem {...formItemLayout} label="IP Address">
+              {getFieldDecorator('address', {
+                initialValue: status?status.addresses[0].address:'',
               })(<Input />)}
             </FormItem>
-            <FormItem {...formItemLayout} label="Website">
-              {getFieldDecorator('website', {
-                initialValue: website,
+            <FormItem {...formItemLayout} label="NodeInfo">
+              {getFieldDecorator('nodeInfo', {
+                initialValue: status?status.nodeInfo.osImage:'',
               })(<Input />)}
             </FormItem>
           </Form>
@@ -75,4 +75,4 @@ class UserEditModal extends Component {
   }
 }
 
-export default Form.create()(UserEditModal);
+export default Form.create()(NodeEditModal);

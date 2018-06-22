@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import createHistory from 'umi/_createHistory';
 import FastClick from 'umi-fastclick';
 
+
 document.addEventListener(
   'DOMContentLoaded',
   () => {
     FastClick.attach(document.body);
   },
-  false
+  false,
 );
 
 // create history
@@ -16,17 +17,15 @@ window.g_history = createHistory({
   basename: window.routerBase,
 });
 
+
 // render
 function render() {
   const DvaContainer = require('./DvaContainer').default;
-  ReactDOM.render(
-    React.createElement(
-      DvaContainer,
-      null,
-      React.createElement(require('./router').default)
-    ),
-    document.getElementById('root')
-  );
+ReactDOM.render(React.createElement(
+  DvaContainer,
+  null,
+  React.createElement(require('./router').default)
+), document.getElementById('root'));
 }
 render();
 
@@ -37,16 +36,9 @@ if (module.hot) {
   });
 }
 
-if (process.env.NODE_ENV === 'development') {
-  window.g_history.listen(function(location) {
-    new Image().src = (window.routerBase + location.pathname).replace(
-      /\/\//g,
-      '/'
-    );
-  });
-}
-
+require('/home/savoki/sdb1/web/dva/examples/user-dashboard/src/global.css');
 // Enable service worker
 if (process.env.NODE_ENV === 'production') {
   require('./registerServiceWorker');
 }
+      
